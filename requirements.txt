@@ -1,4 +1,6 @@
-flask
-Flask-Cors
-pyodbc
 configparser
+Flask==3.0.0
+pyodbc==5.0.0
+requests==2.31.0
+virtualenv==20.24.4
+Flask-Cors==4.0.0
