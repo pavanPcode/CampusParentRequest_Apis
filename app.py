@@ -10,7 +10,7 @@ CORS(app)
 def index():
     return 'Campus Parents Appointment'
 
-#import
+
 app.register_blueprint(ParentsDetails.parentsDetailsapp)
 app.register_blueprint(VisitsPickups.VisitsPickupsapp)
 
