@@ -18,6 +18,10 @@ SET isactive = 0,
 WHERE RequestID = {0}; 
 """
 
-Getvisitorpickupqueries = """select v.*,COALESCE(r.fullname, r.firstname) AS studentname from Request.VisitsPickups  V
+Getvisitorpickupqueries = """select v.RequestID,v.RegID,FORMAT(v.StartDateTime, 'yyyy-MM-dd HH:mm tt'),FORMAT(v.EndDateTime, 'yyyy-MM-dd HH:mm tt')
+,v.VisitorName,v.Reason,v.RequestType,v.Status,
+v.IsActive,v.mobileNo,v.GuardianDetailsid
+,COALESCE(r.fullname, r.firstname) AS studentname from Request.VisitsPickups  V
 inner join [Campus].[Registrations] r on r.id = v.RegID
-where V.mobileno = '{0}' and V.isactive = 1"""
+where V.mobileno = '{0}' and V.isactive = 1 
+order by id desc"""
