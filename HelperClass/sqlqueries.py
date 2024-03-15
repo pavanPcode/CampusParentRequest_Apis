@@ -19,7 +19,7 @@ WHERE RequestID = {0};
 """
 
 Getvisitorpickupqueries = """select v.RequestID,v.RegID,FORMAT(v.StartDateTime, 'yyyy-MM-dd HH:mm tt') StartDateTime,FORMAT(v.EndDateTime, 'yyyy-MM-dd HH:mm tt') EndDateTime
-,v.VisitorName,v.Reason,v.RequestType,v.Status,
+,v.VisitorName,v.Reason,v.RequestType,v.Status,FORMAT(v.createdon, 'yyyy-MM-dd HH:mm tt') createdon,
 v.IsActive,v.mobileNo,v.GuardianDetailsid
 ,COALESCE(r.fullname, r.firstname) AS studentname from Request.VisitsPickups  V
 inner join [Campus].[Registrations] r on r.id = v.RegID
