@@ -18,8 +18,8 @@ SET isactive = 0,
 WHERE RequestID = {0}; 
 """
 
-Getvisitorpickupqueries = """select v.RequestID,v.RegID,FORMAT(v.StartDateTime, 'yyyy-MM-dd HH:mm tt') StartDateTime,FORMAT(v.EndDateTime, 'yyyy-MM-dd HH:mm tt') EndDateTime
-,v.VisitorName,v.Reason,v.RequestType,v.Status,FORMAT(v.createdon, 'yyyy-MM-dd HH:mm tt')  CreatedOn,
+Getvisitorpickupqueries = """select v.RequestID,v.RegID,FORMAT(v.StartDateTime, 'dd-MM-yyyy HH:mm tt') StartDateTime,FORMAT(v.EndDateTime, 'dd-MM-yyyy HH:mm tt') EndDateTime
+,v.VisitorName,v.Reason,v.RequestType,v.Status,FORMAT(v.createdon, 'dd-MM-yyyy HH:mm tt')  CreatedOn,
 v.IsActive,v.mobileNo,v.GuardianDetailsid
 ,COALESCE(r.fullname, r.firstname) AS studentname from Request.VisitsPickups  V
 inner join [Campus].[Registrations] r on r.id = v.RegID
