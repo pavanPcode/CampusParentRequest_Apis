@@ -15,6 +15,6 @@ app.register_blueprint(ParentsDetails.parentsDetailsapp)
 app.register_blueprint(VisitsPickups.VisitsPickupsapp)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
 
 
