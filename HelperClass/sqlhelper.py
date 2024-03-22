@@ -11,7 +11,7 @@ class sqlserverhelper():
     """ Collection of helper methods to query the MS SQL Server database.
     """
     def __init__(self):
-        dbname = 'dbconnlocal'
+        dbname = 'dbconn'
         self.connstr = dbinfo.format(config.get(dbname,"host"),config.get(dbname,"database"),config.get(dbname,"user"),config.get(dbname,"password"))
         #self.dbconn = pyodbc.connect(conn)
     
