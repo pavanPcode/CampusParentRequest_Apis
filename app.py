@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from Services import ParentsDetails,VisitsPickups
+from Services import ParentsDetails,VisitsPickups,Announcements
 
 
 app = Flask(__name__)
@@ -13,6 +13,7 @@ def index():
 
 app.register_blueprint(ParentsDetails.parentsDetailsapp)
 app.register_blueprint(VisitsPickups.VisitsPickupsapp)
+app.register_blueprint(Announcements.Announcementsapp)
 
 if __name__ == '__main__':
     app.run()

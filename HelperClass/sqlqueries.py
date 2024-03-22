@@ -18,10 +18,27 @@ SET isactive = 0,
 WHERE RequestID = {0}; 
 """
 
-Getvisitorpickupqueries = """select v.RequestID,v.RegID,FORMAT(v.StartDateTime, 'dd-MM-yyyy HH:mm tt') StartDateTime,FORMAT(v.EndDateTime, 'dd-MM-yyyy HH:mm tt') EndDateTime
+Getvisitorpickupqueries = """select v.RequestID,v.RegID,FORMAT(v.StartDateTime, 'dd-MM-yyyy HH:mm tt') StartDateTime,FORMAT(v.EndDateTime, 'dd-MM-yyyy` HH:mm tt') EndDateTime
 ,v.VisitorName,v.Reason,v.RequestType,v.Status,FORMAT(v.createdon, 'dd-MM-yyyy HH:mm tt')  CreatedOn,
 v.IsActive,v.mobileNo,v.GuardianDetailsid
 ,COALESCE(r.fullname, r.firstname) AS studentname from Request.VisitsPickups  V
 inner join [Campus].[Registrations] r on r.id = v.RegID
 where V.mobileno = '{0}' and V.isactive = 1 
 order by id desc"""
+
+
+CreateAnnouncementsquerie = """ INSERT INTO [Request].Announcements (Name, Description, StartDateTime, EndDateTime,Superid)
+VALUES ('{0}', '{1}', '{2}', '{3}',{4});"""
+
+UpdateAnnouncementsquerie = """UPDATE [Request].Announcements
+SET Name = '{0}', Description = '{1}',
+StartDateTime = '{2}',EndDateTime = '{3}' ,Superid = {4},UpdatedOn = DATEADD(MINUTE, 330, GETUTCDATE())
+WHERE ID = 1; -- Assuming you want to update the announcement with ID = {5} """
+
+DeleteAnnouncementsquerie = """UPDATE [Request].Announcements SET IsActive = 0,UpdatedOn = DATEADD(MINUTE, 330, GETUTCDATE()) WHERE ID = {0};  """
+
+GetAnnouncementsquerie = """SELECT * FROM [Request].Announcements 
+WHERE IsActive = 1 
+AND Superid = {0} 
+AND (StartDateTime between DATEADD(DAY, -7, GETDATE()) and GETDATE() OR 
+EndDateTime between   GETDATE() and DATEADD(DAY, 7, GETDATE())); """
