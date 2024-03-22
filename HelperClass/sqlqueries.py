@@ -37,7 +37,8 @@ WHERE ID = 1; -- Assuming you want to update the announcement with ID = {5} """
 
 DeleteAnnouncementsquerie = """UPDATE [Request].Announcements SET IsActive = 0,UpdatedOn = DATEADD(MINUTE, 330, GETUTCDATE()) WHERE ID = {0};  """
 
-GetAnnouncementsquerie = """SELECT * FROM [Request].Announcements 
+GetAnnouncementsquerie = """SELECT id,superid,name,description,startdatetime,enddatetime,isactive,createdon,updatedon
+ FROM [Request].Announcements 
 WHERE IsActive = 1 
 AND Superid = {0} 
 AND (StartDateTime between DATEADD(DAY, -7, GETDATE()) and GETDATE() OR 
