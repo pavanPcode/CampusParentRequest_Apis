@@ -1,0 +1,25 @@
+
+CREATE TABLE [Request].Announcements (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+	Superid int,
+    Name VARCHAR(255), -- Assuming the name can be up to 255 characters
+    Description TEXT, -- Assuming the description can be of longer length
+    StartDateTime DATETIME,
+    EndDateTime DATETIME,
+    IsActive BIT DEFAULT 1,
+    CreatedOn DATETIME DEFAULT DATEADD(MINUTE, 330, GETUTCDATE()),
+    UpdatedOn DATETIME
+);
+-----------------------
+
+CREATE TABLE [Request].imagesAdvPaths (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+	Superid int,
+    imageName VARCHAR(255),
+    StartDateTime DATETIME,
+    EndDateTime DATETIME,
+    isExpire BIT,
+    IsActive BIT DEFAULT 1,
+    CreatedOn DATETIME DEFAULT DATEADD(MINUTE, 330, GETUTCDATE()),
+    UpdatedOn DATETIME
+);

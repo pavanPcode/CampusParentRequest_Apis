@@ -33,7 +33,7 @@ VALUES ('{0}', '{1}', '{2}', '{3}',{4});"""
 UpdateAnnouncementsquerie = """UPDATE [Request].Announcements
 SET Name = '{0}', Description = '{1}',
 StartDateTime = '{2}',EndDateTime = '{3}' ,Superid = {4},UpdatedOn = DATEADD(MINUTE, 330, GETUTCDATE())
-WHERE ID = 1; -- Assuming you want to update the announcement with ID = {5} """
+WHERE ID = {5}; -- Assuming you want to update the announcement with ID = {5} """
 
 DeleteAnnouncementsquerie = """UPDATE [Request].Announcements SET IsActive = 0,UpdatedOn = DATEADD(MINUTE, 330, GETUTCDATE()) WHERE ID = {0};  """
 
@@ -43,3 +43,20 @@ WHERE IsActive = 1
 AND Superid = {0} 
 AND (StartDateTime between DATEADD(DAY, -7, GETDATE()) and GETDATE() OR 
 EndDateTime between   GETDATE() and DATEADD(DAY, 7, GETDATE())); """
+
+GetimagesAdvPathsQuary = """select id,imagename from [Request].imagesAdvPaths  
+                            where isactive = 1  and isexpire = 0 and superid = {0}
+                                    union all
+                            select id,imagename from [Request].imagesAdvPaths  
+                            where isactive = 1  and isexpire = 1 and superid = {0}  
+                            AND (startdatetime between DATEADD(DAY, -7, GETDATE()) and GETDATE() OR 
+                            enddatetime between   GETDATE() and DATEADD(DAY, 7, GETDATE()));"""
+
+deleteimagesAdvPathsQuary = """UPDATE [Request].imagesAdvPaths  SET isactive = 0,
+    UpdatedOn = DATEADD(MINUTE, 330, GETUTCDATE()) WHERE id = {0};"""
+
+createimagesAdvPathsExpireQuary = """INSERT INTO [Request].imagesAdvPaths (superid,imageName, StartDateTime, EndDateTime,isExpire)
+VALUES ({0},'{1}', '{2}', '{3}',{4});"""
+
+createimagesAdvPathsQuary = """INSERT INTO [Request].imagesAdvPaths (superid,imageName,isExpire)
+VALUES ({0},'{1}',{2});"""
